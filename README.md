@@ -48,7 +48,6 @@ Plánované skilly (kontribuce vítány — viz [CONTRIBUTING.md](./CONTRIBUTING
 - [ ] **decision-memo** — Strukturovaný 1-page decision memo z volných poznámek
 - [ ] **exec-summary** — 1-page sumarizace dlouhého dokumentu pro management
 - [ ] **opportunity-scoring** — RICE/ICE scoring nápadů pro backlog
-- [ ] **user-stories-invest** — User stories v INVEST formátu + acceptance criteria
 
 ---
 
