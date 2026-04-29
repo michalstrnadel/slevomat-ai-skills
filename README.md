@@ -16,26 +16,77 @@
 
 ---
 
-## Jak skill používat
+## Instalace
 
-### A) Claude Code desktop app (nejvíc komfortní)
+### A) Claude Code (desktop app nebo CLI) — doporučeno
 
-1. Naklonuj repo nebo stáhni jeho ZIP
-2. Zkopíruj požadovaný skill do `~/.claude/skills/<skill-name>/`
-3. Otevři Claude Code v projektu, který chceš touchnout
-4. Napiš trigger frázi (viz README v každé skill složce)
+**Jednorázová instalace všech skillů (Mac/Linux):**
 
-### B) Claude.ai (přes Skills upload)
+```bash
+# 1. Naklonuj repo do dočasné složky
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas
+
+# 2. Zkopíruj skilly do ~/.claude/skills/
+mkdir -p ~/.claude/skills
+cp -r /tmp/sas/design-check ~/.claude/skills/
+cp -r /tmp/sas/slevomat-rapid-prototype ~/.claude/skills/
+
+# 3. Úklid
+rm -rf /tmp/sas
+```
+
+**Updaty (když přidáme nový skill nebo opravíme existující):**
+
+```bash
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && \
+cp -rf /tmp/sas/design-check ~/.claude/skills/ && \
+cp -rf /tmp/sas/slevomat-rapid-prototype ~/.claude/skills/ && \
+rm -rf /tmp/sas
+```
+
+**Alternativa — symlink (auto-updates s `git pull`):**
+
+```bash
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git ~/slevomat-ai-skills
+mkdir -p ~/.claude/skills
+ln -s ~/slevomat-ai-skills/design-check ~/.claude/skills/design-check
+ln -s ~/slevomat-ai-skills/slevomat-rapid-prototype ~/.claude/skills/slevomat-rapid-prototype
+# Update kdykoliv:  cd ~/slevomat-ai-skills && git pull
+```
+
+**Po instalaci:** restart Claude Code session (zavři a otevři okno). Skill se aktivuje napsáním trigger fráze v chatu (viz README každého skillu).
+
+### B) Claude.ai (web) — přes Skills upload
 
 Každý skill má v složce předbalený `*.zip` soubor. V Claude.ai:
 
 1. Skills panel → **+** → **Create skill** → **Upload a skill**
-2. Vyber `<skill-name>.zip` z této kolekce
-3. Skill se aktivuje napsáním trigger fráze
+2. Stáhni ZIP z GitHubu:
+   - design-check: [slevomat-design-check.zip](./design-check/slevomat-design-check.zip)
+   - rapid-prototype: [slevomat-rapid-prototype.zip](./slevomat-rapid-prototype/slevomat-rapid-prototype.zip)
+3. Vyber stažený ZIP, klikni Upload
+4. Skill se aktivuje napsáním trigger fráze v konverzaci
 
-### C) Bez uploadu (paste prompt)
+### C) Bez instalace (paste prompt do chatu)
 
-Některé skilly mají `PROMPT.md` (single-file portable). Otevři ho v Raw view, copy → paste do první zprávy v chatu (Claude / Gemini / GPT).
+Některé skilly mají `PROMPT.md` (single-file portable). Otevři ho v GitHub Raw view, copy → paste do první zprávy v chatu (Claude / Gemini / GPT). Druhá zpráva = vstup pro skill.
+
+design-check má [PROMPT.md](./design-check/PROMPT.md) připravený pro tenhle režim.
+
+### Ověření instalace (Claude Code)
+
+V Claude Code chatu napiš:
+
+```
+/skill list
+```
+
+(nebo otevři Skills panel v desktop app — Slevomat skilly by měly být v sekci "Personal skills".)
+
+Pokud skilly nevidíš:
+- Zkontroluj, že jsi je zkopíroval do `~/.claude/skills/` (ne `~/.claude/Skills/` nebo jinam — case sensitive)
+- Restartuj Claude Code
+- Ověř, že každý skill má `SKILL.md` v root své složky (ne v podsložce)
 
 ---
 
