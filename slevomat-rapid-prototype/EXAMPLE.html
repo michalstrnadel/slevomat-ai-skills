@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wellness pobyty — Slevomat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap">
+  <style>
+    :root {
+      --color-primary: #006eb9; --color-primary-hover: #005685;
+      --color-cta-buy: #088107; --color-cta-buy-hover: #066506;
+      --color-success: #088107; --color-success-light: #e9fce9;
+      --color-error: #d2381d;   --color-error-light: #ffefec;
+      --color-info: #006eb9;    --color-info-light: #e6f3fb;
+      --color-text-primary: #000; --color-text-secondary: #6b6b70;
+      --color-text-on-primary: #fff;
+      --color-background: #fcfdff; --color-surface: #fff; --color-surface-faded: #f1f3f5;
+      --color-border: #cbccce; --color-border-subtle: #e3e4e6;
+      --color-discount: #d2381d; --color-original-price: #6b6b70;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius-md: 8px; --radius-lg: 12px; --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1.5;
+      background: var(--color-background); color: var(--color-text-primary);
+    }
+
+    /* Topbar */
+    .topbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border-subtle); }
+    .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+      display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .logo { font-size: 24px; font-weight: 700; color: var(--color-primary); text-decoration: none; }
+    .logo-domain { color: var(--color-text-primary); }
+    .topbar-actions { display: flex; gap: 12px; align-items: center; }
+
+    /* Category nav */
+    .category-nav { background: var(--color-surface); border-bottom: 1px solid var(--color-border-subtle); }
+    .category-nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; gap: 4px; overflow-x: auto; }
+    .cat-link { padding: 16px 16px; color: var(--color-text-primary); text-decoration: none;
+      font-weight: 500; border-bottom: 2px solid transparent; white-space: nowrap; }
+    .cat-link.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+    .cat-link:hover { color: var(--color-primary); }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+    /* Breadcrumb */
+    .breadcrumb { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 16px; }
+    .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-primary); }
+
+    /* Page header */
+    .page-header { margin-bottom: 32px; }
+    .page-header h1 { font-size: 40px; font-weight: 900; margin: 0 0 12px; line-height: 1.15; }
+    .page-header .lead { font-size: 18px; color: var(--color-text-secondary);
+      max-width: 720px; margin: 0; line-height: 1.5; }
+    .page-header .meta { font-size: 14px; color: var(--color-text-secondary); margin-top: 16px; }
+
+    /* Filter chips */
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; align-items: center; }
+    .filter-label { font-size: 14px; color: var(--color-text-secondary); margin-right: 8px; }
+    .chip { padding: 8px 16px; border-radius: var(--radius-full); border: 1px solid var(--color-border);
+      background: var(--color-surface); font-size: 14px; cursor: pointer; }
+    .chip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .chip.active { background: var(--color-info-light); border-color: var(--color-primary); color: var(--color-primary); }
+
+    /* Alert */
+    .alert { padding: 16px; border-radius: var(--radius-md); border-left: 4px solid var(--color-info);
+      background: var(--color-info-light); margin-bottom: 24px; font-size: 14px; }
+    .alert strong { color: var(--color-primary); }
+
+    /* Card grid */
+    .card-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 768px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1008px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Card */
+    .card { background: var(--color-surface); border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 120ms ease; cursor: pointer; }
+    .card:hover { box-shadow: var(--shadow-md); }
+
+    .card-image { position: relative; height: 220px; background-size: cover; background-position: center; }
+    .card-badge { position: absolute; top: 12px; left: 12px; padding: 4px 10px;
+      background: var(--color-discount); color: var(--color-text-on-primary);
+      font-size: 12px; font-weight: 700; border-radius: var(--radius-md); }
+    .card-badge.new { background: var(--color-success); }
+    .card-fav { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px;
+      border-radius: 50%; border: none; background: rgba(255,255,255,0.95);
+      font-size: 18px; cursor: pointer; box-shadow: var(--shadow-sm); }
+
+    .card-body { padding: 16px; }
+    .card-tag { display: inline-block; padding: 4px 10px; border-radius: var(--radius-full);
+      background: var(--color-surface-faded); color: var(--color-text-primary);
+      font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+    .card-tag.success { background: var(--color-success-light); color: var(--color-success); }
+    .card-title { font-size: 18px; font-weight: 700; margin: 0 0 8px; line-height: 1.3; }
+    .card-meta { font-size: 14px; color: var(--color-text-secondary); margin: 0 0 12px; line-height: 1.5; }
+    .card-rating { display: flex; align-items: center; gap: 8px; font-size: 14px;
+      color: var(--color-text-secondary); margin-bottom: 12px; }
+    .card-rating .stars { color: #ffa400; }
+    .card-pricing { display: flex; gap: 8px; align-items: baseline; margin-bottom: 12px; }
+    .price-current { font-size: 22px; font-weight: 800; color: var(--color-text-primary); }
+    .price-original { font-size: 14px; color: var(--color-original-price); text-decoration: line-through; }
+    .card-cta { display: block; width: 100%; padding: 12px; text-align: center;
+      background: var(--color-cta-buy); color: var(--color-text-on-primary);
+      border: none; border-radius: var(--radius-md); font-size: 14px; font-weight: 600;
+      cursor: pointer; }
+    .card-cta:hover { background: var(--color-cta-buy-hover); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-sans); font-size: 14px; font-weight: 600; line-height: 1;
+      padding: 10px 16px; border-radius: var(--radius-md); border: 1px solid transparent;
+      cursor: pointer; text-decoration: none;
+    }
+    .btn-primary { background: var(--color-primary); color: var(--color-text-on-primary); }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-tertiary { background: transparent; color: var(--color-text-primary); padding: 8px 12px; }
+    .btn-tertiary:hover { color: var(--color-primary); }
+
+    /* Footer / sekundární CTA */
+    .secondary-cta { text-align: center; margin: 48px 0; }
+    .secondary-cta .btn { padding: 14px 32px; font-size: 16px; }
+
+    @media (max-width: 600px) {
+      .topbar-inner { padding: 12px 16px; gap: 12px; }
+      .topbar-actions { gap: 8px; }
+      .container { padding: 16px; }
+      .page-header h1 { font-size: 28px; }
+      .page-header .lead { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="/">slevomat<span class="logo-domain">.cz</span></a>
+      <nav class="topbar-actions">
+        <a class="btn btn-tertiary" href="#">♡ Oblíbené</a>
+        <a class="btn btn-primary" href="#">🛒 Košík</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <div class="category-nav-inner">
+      <a class="cat-link" href="#">Extra slevy</a>
+      <a class="cat-link" href="#">Cestování</a>
+      <a class="cat-link active" href="#">Wellness</a>
+      <a class="cat-link" href="#">Restaurace</a>
+      <a class="cat-link" href="#">Adrenalin a zážitky</a>
+      <a class="cat-link" href="#">Zboží</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <div class="breadcrumb">
+      <a href="#">Slevomat</a> &rsaquo; <a href="#">Cestování</a> &rsaquo; <span>Wellness pobyty</span>
+    </div>
+
+    <div class="page-header">
+      <h1>Wellness pobyty</h1>
+      <p class="lead">Saunové rituály, bazény, masáže a procedury — od českých penzionů přes karlovarské lázně po pětihvězdičkové hotely v Polsku a Slovensku. Ceny od 2 690 Kč za osobu.</p>
+      <p class="meta">324 nabídek · řazeno podle doporučení</p>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">Filtrovat:</span>
+      <button class="chip active">Česko</button>
+      <button class="chip">Lokalita</button>
+      <button class="chip">Termín</button>
+      <button class="chip">Délka pobytu</button>
+      <button class="chip">Cena do 5 000 Kč</button>
+      <button class="chip">Hodnocení 4+</button>
+      <button class="chip">Polopenze</button>
+    </div>
+
+    <div class="alert">
+      ℹ️ U vybraných pobytů platí <strong>First minute sleva</strong> až 15 % při rezervaci do 31. 5. 2026.
+    </div>
+
+    <section class="card-grid">
+
+      <article class="card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1601999094016-7f0fda3b1eed?w=600&h=400&fit=crop')">
+          <span class="card-badge">−24 %</span>
+          <button class="card-fav" aria-label="Oblíbené">♡</button>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Pobyty s polopenzí</span>
+          <h3 class="card-title">Krkonoše: 4* hotel s polopenzí a wellness pro dva</h3>
+          <p class="card-meta">Hotel Horizont · Pec pod Sněžkou · 3 dny / 2 noci</p>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span>5 z 5 (214 hodnocení)</span>
+          </div>
+          <div class="card-pricing">
+            <span class="price-current">3 990 Kč</span>
+            <span class="price-original">5 250 Kč</span>
+          </div>
+          <button class="card-cta">Vybrat termín</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=400&fit=crop')">
+          <span class="card-badge new">Novinka</span>
+          <button class="card-fav" aria-label="Oblíbené">♡</button>
+        </div>
+        <div class="card-body">
+          <span class="card-tag success">Volné termíny</span>
+          <h3 class="card-title">Lázně Luhačovice: privátní wellness suite s vínem</h3>
+          <p class="card-meta">Hotel Augustiniánský dům · Luhačovice · 2 dny / 1 noc</p>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span>4,8 z 5 (86 hodnocení)</span>
+          </div>
+          <div class="card-pricing">
+            <span class="price-current">6 490 Kč</span>
+          </div>
+          <button class="card-cta">Vybrat termín</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop')">
+          <span class="card-badge">−18 %</span>
+          <button class="card-fav" aria-label="Oblíbené">♡</button>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Wellness</span>
+          <h3 class="card-title">Karlovy Vary: 3 dny v lázních s procedurami</h3>
+          <p class="card-meta">Spa Hotel Termal · Karlovy Vary · 3 dny / 2 noci</p>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span>4,7 z 5 (412 hodnocení)</span>
+          </div>
+          <div class="card-pricing">
+            <span class="price-current">4 290 Kč</span>
+            <span class="price-original">5 250 Kč</span>
+          </div>
+          <button class="card-cta">Vybrat termín</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop')">
+          <span class="card-badge">−15 %</span>
+          <button class="card-fav" aria-label="Oblíbené">♡</button>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Pobyty s polopenzí</span>
+          <h3 class="card-title">Vysoké Tatry: Wellness pobyt s výhledem na štíty</h3>
+          <p class="card-meta">Hotel Tatra · Tatranská Lomnica · 4 dny / 3 noci</p>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span>4,9 z 5 (158 hodnocení)</span>
+          </div>
+          <div class="card-pricing">
+            <span class="price-current">7 490 Kč</span>
+            <span class="price-original">8 800 Kč</span>
+          </div>
+          <button class="card-cta">Vybrat termín</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop')">
+          <button class="card-fav" aria-label="Oblíbené">♡</button>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Wellness</span>
+          <h3 class="card-title">Beskydy: Saunový svět + masáž pro dva</h3>
+          <p class="card-meta">Wellness penzion Bečva · Rožnov pod Radhoštěm · 2 dny / 1 noc</p>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span>4,6 z 5 (98 hodnocení)</span>
+          </div>
+          <div class="card-pricing">
+            <span class="price-current">2 990 Kč</span>
+          </div>
+          <button class="card-cta">Vybrat termín</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=400&fit=crop')">
+          <span class="card-badge">−30 %</span>
+          <button class="card-fav" aria-label="Oblíbené">♡</button>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Lázně</span>
+          <h3 class="card-title">Mariánské Lázně: 5* lázeňský pobyt all inclusive</h3>
+          <p class="card-meta">Nové Lázně · Mariánské Lázně · 5 dní / 4 noci</p>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span>
+            <span>5 z 5 (327 hodnocení)</span>
+          </div>
+          <div class="card-pricing">
+            <span class="price-current">12 990 Kč</span>
+            <span class="price-original">18 500 Kč</span>
+          </div>
+          <button class="card-cta">Vybrat termín</button>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="secondary-cta">
+      <a class="btn btn-primary" href="#">Zobrazit všechny wellness pobyty (324)</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
