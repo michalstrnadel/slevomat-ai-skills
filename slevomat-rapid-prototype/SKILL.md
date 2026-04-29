@@ -39,13 +39,32 @@ Pokud user popsal vágně, polož **2 cílené otázky v jedné zprávě**:
 1. **Typ stránky** — listing (grid karet)? PDP (detail nabídky)? Checkout? Landing? Hero? Form? Custom?
 2. **Hlavní akce** — co má uživatel udělat (koupit, registrovat, srovnat, prozkoumat)? Nebo jen mockup pro inspiraci?
 
-Pokud je popis dostatečný (např. "udělej landing pro novou kategorii Wellness Tipy s herem, 3 cards a CTA"), **vynech clarify** a jdi rovnou do Fáze 2.
+Pokud je popis dostatečný (např. "udělej landing pro novou kategorii Wellness Tipy s herem, 3 cards a CTA"), **vynech clarify** a jdi rovnou do Fáze 1.5.
+
+### Fáze 1.5 — Fetch real Slevomat content (volitelné, doporučené)
+
+Pokud je k dispozici WebFetch tool a prototyp simuluje **reálnou Slevomat featuru** (listing pobytů, wellness karty, restaurace…):
+
+1. **Fetchni** příslušnou kategorii ze slevomat.cz:
+   - Cestování: `https://www.slevomat.cz/cestovani`
+   - Wellness: `https://www.slevomat.cz/wellness`
+   - Restaurace: `https://www.slevomat.cz/restaurace`
+   - Adrenalin: `https://www.slevomat.cz/adrenalin-zazitky`
+   - Zboží: `https://www.slevomat.cz/zbozi`
+   - Homepage: `https://www.slevomat.cz/`
+2. **Vytáhni 3–6 reálných dealů:** název, cena (current + original), lokalita, délka, kategorie tag, URL fotky (`slevomat-cdn.akamaized.net/...` nebo podobné).
+3. **Použij real data v prototypu** — real foto URLs (přímo z slevomatu) + real názvy + real ceny.
+
+**Pokud WebFetch není k dispozici nebo selže** (rate limit, 4xx, …): pokračuj bez fetche, použij curated Unsplash URLs z DESIGN.md sekce 9a + plausible fiktivní obsah. Nikdy se nezasekni — fetch je bonus, ne blocker.
+
+**Pokud user nechce real data** (např. "úplně nový koncept, neexistující kategorie"): skip fetch, jen Unsplash + fiktivní obsah.
 
 ### Fáze 2 — Read DESIGN.md, plan structure
 
 1. Přečti `DESIGN.md` (mandatory).
 2. Z popisu vyber relevantní komponenty: Topbar (skoro vždy), Category nav (pokud je to public stránka), Container, sekce s nadpisem, card-grid, alert, button, tag.
 3. Naplánuj page strukturu mentálně (1–6 hlavních bloků).
+4. **Zvol fotky** — buď z fetche (Fáze 1.5), nebo z Unsplash tabulky v DESIGN.md sekce 9a. Žádné emoji.
 
 ### Fáze 3 — Generate single-file HTML
 
@@ -163,15 +182,15 @@ Iterace: napiš "udělej tmavší", "přidej druhý variant", "přesuň hero nah
 
 ## Anti-patterns
 
+- **🚫 NIKDY emoji jako hlavní fotka** — žádný 🏔️, 💆, 🍷, 🏖️, 🍝, 🏨 v `card-image`, hero pozadí, nebo jakémkoli místě, kam patří fotka. **Vždy** real Unsplash URL z DESIGN.md sekce 9a, nebo fetched URL ze slevomat.cz, nebo šedý placeholder. Emoji jsou OK jen pro **malé ikony** (heart ♡, košík 🛒, hvězdička ★).
 - **NEDĚLEJ:** Nepřidávej JavaScript pokud user nepožádá. Prototyp simuluje funkce CSS-only (`:hover`, `:focus`, `details/summary`).
 - **NEDĚLEJ:** Nezahrnuj externí JS knihovny (Bootstrap, Tailwind, Alpine, Vue, React). Pouze inline `<style>`.
-- **NEDĚLEJ:** Nepoužívej Lorem ipsum / "Card title 1" / "Description here". Vždy plausible Slevomat content (CZ destinace, reálné ceny v Kč, reálné kategorie).
+- **NEDĚLEJ:** Nepoužívej Lorem ipsum / "Card title 1" / "Description here". Vždy plausible Slevomat content (CZ destinace, reálné ceny v Kč, reálné kategorie). Pokud máš WebFetch, raději fetchni real data ze slevomat.cz.
 - **NEDĚLEJ:** Nepoužívej `<minis-button>` ani jiné Mini*S web components — to potřebuje pnpm setup. Píšeš plain HTML s class-based styling co napodobuje vzhled.
 - **NEDĚLEJ:** Negeneruj víc souborů (žádný `index.html` + `style.css` + `app.js`). VŽDY single `.html`.
 - **NEDĚLEJ:** Neotevírej soubor (`open ...`) bez explicitní žádosti uživatele.
 - **NEDĚLEJ:** Nehazardiruj se 4+ akcentovými barvami v 1 sekci (per princip #2). Vyber 1 hlavní akcent.
 - **NEDĚLEJ:** Nepřidávej animace odpočtu / blikající banners / urgency popups (per princip #3 + #4).
-- **NEDĚLEJ:** Nesimuluj real Slevomat data, která neznáš (real partnerská jména, real produkty z databáze) — používej fiktivní plausible obsah.
 - **NEDĚLEJ:** Negeneruj prototyp delší než 1 viewport bez clarify — pokud user chce "celá homepage" s 10 sekcemi, zeptej se na priority.
 
 ## Reference

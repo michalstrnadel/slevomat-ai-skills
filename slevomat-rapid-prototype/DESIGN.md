@@ -376,15 +376,68 @@ Když píšeš HTML, drž se těchto pravidel:
 1. **Single-file output.** Veškeré CSS v `<style>` v `<head>`. Žádné `<link rel="stylesheet" href="local.css">`.
 2. **Pouze tyhle externí dependencies:**
    - Google Fonts (`fonts.googleapis.com/css2?family=Inter:…`)
-   - Unsplash pro placeholder fotky (`https://images.unsplash.com/photo-…?w=600`)
-   - Lucide icons přes inline SVG nebo CDN (volitelné — emoji ♡ ★ ☆ 🛒 fungují taky)
+   - Reálné fotky (viz pravidlo 6 níže — buď ze slevomat.cz nebo z Unsplash s přesnými URL)
+   - Pro malé ikony (heart ♡, košík 🛒, hvězdičky ★) je OK Unicode emoji NEBO inline SVG, NIKDY emoji jako hlavní fotka karty / hero / banner
 3. **Použij CSS custom properties** z této DESIGN.md, ne magic values. Pokud hodnota chybí, použij nejbližší token.
 4. **Sémantické HTML** — `<header>`, `<main>`, `<article>`, `<nav>`, `<section>`, `<button>` (ne `<div onclick>`).
 5. **Czech jazyk** — všechny labely, tlačítka, nadpisy. Žádné "Submit", "Cancel" — vždy "Odeslat", "Zrušit".
-6. **Reálná data** — ne lorem ipsum. Použij plausible Slevomat content (CZ destinace, reálné ceny, reálné kategorie). Když nevíš → zeptej se.
+6. **🚫 ABSOLUTNÍ ZÁKAZ EMOJI JAKO FOTKY.** Žádný 🏔️, 💆, 🍷, 🏖️, 🍝, 🏨 v `card-image`, hero pozadí, nebo jakémkoli místě, kde má být fotka. Vždy použij **reálnou fotku** — buď:
+   - **(a) Reálný produkt ze slevomat.cz** (preferred, viz pravidlo 11) s odkazem na real obrázek z `slevomat-cdn.akamaized.net/...`
+   - **(b) Unsplash URL podle kategorie** (z curated tabulky níže)
+   - **(c) Šedý placeholder** `<div style="background: var(--color-surface-faded); ...">` — pokud opravdu žádnou fotku nemáš
 7. **Žádný JavaScript** ledaže si uživatel explicitně vyžádá — prototyp má vypadat funkčně, ale nemusí být funkční (klikací stavy = `:hover`, `:focus` v CSS).
 8. **Kontrast a přístupnost** — WCAG AA min, `aria-label` na icon-only tlačítka, `alt` na obrázky.
 9. **Mobile-first CSS** — defaultní styly pro mobile, `@media (min-width: 768px)` pro desktop overrides.
+
+### 9a. Curated Unsplash URLs per kategorie
+
+Pokud nepoužíváš real slevomat.cz fotky (pravidlo 11), vyber z této tabulky podle obsahu karty:
+
+| Kategorie / téma | Unsplash URL (fixní photo ID) |
+|---|---|
+| Hotel / pobyt obecně | `https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop` |
+| Krkonoše / hory ČR | `https://images.unsplash.com/photo-1601999094016-7f0fda3b1eed?w=600&h=400&fit=crop` |
+| Wellness / sauna | `https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop` |
+| Lázně / spa | `https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=400&fit=crop` |
+| Moře / pláž | `https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop` |
+| Restaurace / jídlo | `https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop` |
+| Víno / degustace | `https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=400&fit=crop` |
+| Vysoké Tatry | `https://images.unsplash.com/photo-1502786129293-79981df4e689?w=600&h=400&fit=crop` |
+| Adrenalin / hory v zimě | `https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&h=400&fit=crop` |
+| Saské Švýcarsko / Německo | `https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=600&h=400&fit=crop` |
+| Chorvatsko / Středomoří | `https://images.unsplash.com/photo-1555990538-32202a08a8ec?w=600&h=400&fit=crop` |
+| Praha / město | `https://images.unsplash.com/photo-1541849546-216549ae216d?w=600&h=400&fit=crop` |
+| Český Krumlov | `https://images.unsplash.com/photo-1610016302534-6f67f1c968d8?w=600&h=400&fit=crop` |
+| Beauty / kosmetika | `https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=400&fit=crop` |
+| Dárkový voucher | `https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600&h=400&fit=crop` |
+
+**Použití v HTML:**
+```html
+<div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1601999094016-7f0fda3b1eed?w=600&h=400&fit=crop')"></div>
+```
+
+### 9b. Default behaviors (zmenšuje počet iterací)
+
+Když user neřekne jinak, default to:
+
+- **Layout:** Topbar → Category nav → Container → 1 hero/H1 sekce → 1 hlavní obsah (grid karet nebo form) → optional sekundární CTA. Žádné footers (zaberou screenshot space, většinou nedávají hodnotu).
+- **Card grid:** 3 karty per row na desktop (`auto-fill, minmax(280px, 1fr)`), 1 column mobile.
+- **Karta = obrázek + cena (current + původní strikethrough) + tag (volitelně) + titulek + meta (lokalita + délka)**. Tlačítko na karte ne — celá karta klikací (cursor: pointer).
+- **Primary CTA = 1 per page** (ne na každé kartě). Listing → CTA "Zobrazit všechny [kategorie]" pod gridem.
+- **Hero:** plná šířka, max-height 400px, fotka + overlay + 1 nadpis + 1 podtitulek + 1 CTA. Žádný carousel, žádné multiple slides.
+- **Hodnocení na kartě:** ⭐ + číslo + počet ("⭐ 4.8 · 86 hodnocení"). Ne 5 ikonek hvězdiček.
+- **Cena formát:** `2 153 Kč` (mezera tisícovek, "Kč" nezalomené), original price `2 825 Kč` v `--color-original-price`, strikethrough.
+
+### 9c. Anti-patterns (časté chyby)
+
+- ❌ Emoji v card-image (🏔️, 💆, atd.)
+- ❌ "Card title 1", "Description here", "Lorem ipsum"
+- ❌ Tabbed interface bez JS (uživatel klikne, nic se nestane)
+- ❌ 3+ akcentové barvy v jedné sekci
+- ❌ Animace odpočtu, blikající banner, "Kupte teď!"
+- ❌ Modal/popup bez close handle
+- ❌ `<img>` bez `alt`
+- ❌ Stock vektorové ilustrace (Unsplash je real photo, ne ilustrace)
 
 **Kostra každého prototypu:**
 
