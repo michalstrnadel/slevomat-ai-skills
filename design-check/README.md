@@ -4,7 +4,6 @@
 > Pure text/image-in → strukturovaný feedback-out. Žádné MCP, žádné generování souborů.
 
 **Status:** v0.1.0 (2026-04-28)
-**Repo visibility:** Public — sdílíme open jako příspěvek do design komunity.
 **Owner:** Michal Strnadel (Design Lead, Slevomat) — michal.strnadel@slevomat.cz
 
 ---
@@ -167,19 +166,6 @@ Tento skill je v0.1. Aby byl ostřejší, design tým by měl doplnit:
 
 ---
 
-## Aplikovaný feedback z workshopu
-
-Při ingestování principů do `design-principles.md` byl zpracovaný **červený feedback z workshopových lístečků**:
-
-- **#1** — doplněna sekce o **přístupnosti** (WCAG AA, kontrast, klávesnice, screen readery). Původně chybělo.
-- **#2** — opraveno z „texty jsou krátké, srozumitelné..." na „texty jsou srozumitelné a..." (Admin Slevomat: text nemusí být krátký, aby byl pochopitelný).
-- **#3** — odstraněno slovo „**červeně**" ze „nemusí křičet červeně" → „nemusí křičet" (vymezovalo se to vůči konkrétní existující verzi, což do principů nepatří).
-- **#7** — pročištěné opakované „blikající efekty" (z 2 výskytů na 1).
-
-Zelené komentáře (Barbora Kejvalová: „Srozumitelně a jasně popsaný :-)") nevyžadovaly změnu.
-
----
-
 ## Vztah k hlavnímu repu
 
 Tento standalone repo je **export ze [slevomat-ai-hub](https://github.com/slevomat/design-slevomat-context)** — interního hubu pro všechny AI skilly Slevomatu. Pokud máš přístup do hubu, používej ho odtamtud (skill je integrovaný s ostatními a sdílí `base/` reference). Tento standalone repo slouží pro:
@@ -202,7 +188,7 @@ Tento standalone repo je **export ze [slevomat-ai-hub](https://github.com/slevom
 
 ## Licence
 
-© Slevomat Group, s.r.o. Sdíleno jako open reference pro design komunitu — můžeš číst, citovat, inspirovat se. Pokud principy přebíráš pro vlastní projekt, prosím odkazuj zpět na tento repo a uveď zdroj. Pro komerční přepoužití nebo uvedení v publikaci kontaktuj michal.strnadel@slevomat.cz.
+© Slevomat Group, s.r.o. Pokud principy přebíráš pro vlastní projekt, prosím odkazuj zpět na tento repo a uveď zdroj. Pro komerční přepoužití nebo uvedení v publikaci kontaktuj michal.strnadel@slevomat.cz.
 
 ---
 

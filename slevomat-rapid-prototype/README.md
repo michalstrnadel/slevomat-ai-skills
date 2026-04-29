@@ -4,7 +4,6 @@
 > Žádné `pnpm`, žádný build, žádný terminál — jen popis → soubor → otevřít dvojklikem v prohlížeči.
 
 **Status:** v0.2.0 (2026-04-29)
-**Visibility:** Public — open reference pro Slevomat tým a design komunitu.
 **Owner:** Michal Strnadel — michal.strnadel@slevomat.cz
 
 ---
@@ -174,7 +173,7 @@ Pokud uživatel rovnou potřebuje real komponenty, skill ho odkáže na vibe-cod
 
 ## Licence
 
-© Slevomat Group, s.r.o. Sdíleno jako open reference pro design komunitu — můžeš číst, citovat, inspirovat se. Pokud skill přebíráš pro vlastní projekt, prosím odkazuj zpět na tento repo a uveď zdroj. Pro komerční přepoužití kontaktuj michal.strnadel@slevomat.cz.
+© Slevomat Group, s.r.o. Pokud skill přebíráš pro vlastní projekt, prosím odkazuj zpět na tento repo a uveď zdroj. Pro komerční přepoužití kontaktuj michal.strnadel@slevomat.cz.
 
 Tokeny v `DESIGN.md` pochází z [Mini*S Design System](https://slevomat.github.io/minis-design-system/) — tamtéž platí jejich licenční podmínky.
 

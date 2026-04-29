@@ -139,14 +139,14 @@ Plánované skilly (kontribuce vítány — viz [CONTRIBUTING.md](./CONTRIBUTING
 | Vrstva | Repo | Účel |
 |---|---|---|
 | **Hub (interní)** | [slevomat-ai-hub](https://github.com/slevomat/design-slevomat-context) | Centralizovaná knowledge base + všechny skilly + brand context. Pro lidi co mají přístup. |
-| **Public skills** (tady) | slevomat-ai-skills | Veřejně sdílené skilly pro tým + design komunitu. Standalone, bez závislosti na hubu. |
+| **Public skills** (tady) | slevomat-ai-skills | Veřejně sdílené skilly pro tým. Standalone, bez závislosti na hubu. |
 | **Mini*S Design System** | [minis-design-system](https://github.com/slevomat/minis-design-system) | Real produkční design system (Lit web components, tokeny, Storybook). |
 
 ---
 
 ## Licence
 
-© Slevomat Group, s.r.o. Sdíleno jako open reference pro design komunitu — můžeš číst, citovat, inspirovat se. Pokud skill přebíráš pro vlastní projekt, prosím odkazuj zpět a uveď zdroj. Pro komerční přepoužití kontaktuj michal.strnadel@slevomat.cz.
+© Slevomat Group, s.r.o. Pokud skill přebíráš pro vlastní projekt, prosím odkazuj zpět a uveď zdroj. Pro komerční přepoužití kontaktuj michal.strnadel@slevomat.cz.
 
 ---
 
