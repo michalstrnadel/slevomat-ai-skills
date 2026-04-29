@@ -19,14 +19,14 @@
 3. Restart Claude Code (Cmd+Q + znovu otevři)
 
 ```bash
-git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && cp -r /tmp/sas/{design-check,slevomat-rapid-prototype} ~/.claude/skills/ && rm -rf /tmp/sas
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && cp -r /tmp/sas/{slevomat-design-principles,slevomat-rapid-prototype} ~/.claude/skills/ && rm -rf /tmp/sas
 ```
 
 ### Cesta 2: Nech Claude Code, ať skilly nainstaluje sám
 
 Otevři Claude Code v jakékoliv složce a v chatu napiš:
 
-> Stáhni Slevomat AI skills z `https://github.com/michalstrnadel/slevomat-ai-skills` a nainstaluj `design-check` a `slevomat-rapid-prototype` do `~/.claude/skills/`.
+> Stáhni Slevomat AI skills z `https://github.com/michalstrnadel/slevomat-ai-skills` a nainstaluj `slevomat-design-principles` a `slevomat-rapid-prototype` do `~/.claude/skills/`.
 
 Claude tě požádá o povolení Bash příkazů → klikni Allow → hotovo.
 
@@ -43,7 +43,7 @@ Jiné cesty (Claude.ai upload, paste prompt, symlink pro auto-update) → [sekce
 
 | Skill | Pro koho | Co dělá | Status |
 |---|---|---|---|
-| [**design-check**](./design-check/) | PM, designer, exec | Posuzuje featuru, screen nebo screenshot mockupu proti **7 designovým principům Slevomatu**. Vrací kompaktní strukturovaný feedback (Hit / Concern / Violation / Cannot tell) + Top 3 akce + verdikt. | v0.1 |
+| [**slevomat-design-principles**](./slevomat-design-principles/) | PM, designer, exec | Posuzuje featuru, screen nebo screenshot mockupu proti **7 designovým principům Slevomatu**. Vrací kompaktní strukturovaný feedback (Hit / Concern / Violation / Cannot tell) + Top 3 akce + verdikt. | v0.1 |
 | [**slevomat-rapid-prototype**](./slevomat-rapid-prototype/) | Kdokoli | Z volného popisu vyrobí **single-file HTML prototyp** ve Slevomat stylu. Žádné dependencies, žádný build, otevřitelné dvojklikem. Komplementární k Mini*S Design System pro 30sekundovou ideaci. | v0.1 |
 
 ---
@@ -60,7 +60,7 @@ git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas
 
 # 2. Zkopíruj skilly do ~/.claude/skills/
 mkdir -p ~/.claude/skills
-cp -r /tmp/sas/design-check ~/.claude/skills/
+cp -r /tmp/sas/slevomat-design-principles ~/.claude/skills/
 cp -r /tmp/sas/slevomat-rapid-prototype ~/.claude/skills/
 
 # 3. Úklid
@@ -71,7 +71,7 @@ rm -rf /tmp/sas
 
 ```bash
 git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && \
-cp -rf /tmp/sas/design-check ~/.claude/skills/ && \
+cp -rf /tmp/sas/slevomat-design-principles ~/.claude/skills/ && \
 cp -rf /tmp/sas/slevomat-rapid-prototype ~/.claude/skills/ && \
 rm -rf /tmp/sas
 ```
@@ -81,7 +81,7 @@ rm -rf /tmp/sas
 ```bash
 git clone https://github.com/michalstrnadel/slevomat-ai-skills.git ~/slevomat-ai-skills
 mkdir -p ~/.claude/skills
-ln -s ~/slevomat-ai-skills/design-check ~/.claude/skills/design-check
+ln -s ~/slevomat-ai-skills/slevomat-design-principles ~/.claude/skills/slevomat-design-principles
 ln -s ~/slevomat-ai-skills/slevomat-rapid-prototype ~/.claude/skills/slevomat-rapid-prototype
 # Update kdykoliv:  cd ~/slevomat-ai-skills && git pull
 ```
@@ -94,7 +94,7 @@ Každý skill má v složce předbalený `*.zip` soubor. V Claude.ai:
 
 1. Skills panel → **+** → **Create skill** → **Upload a skill**
 2. Stáhni ZIP z GitHubu:
-   - design-check: [slevomat-design-check.zip](./design-check/slevomat-design-check.zip)
+   - slevomat-design-principles: [slevomat-design-principles.zip](./slevomat-design-principles/slevomat-design-principles.zip)
    - rapid-prototype: [slevomat-rapid-prototype.zip](./slevomat-rapid-prototype/slevomat-rapid-prototype.zip)
 3. Vyber stažený ZIP, klikni Upload
 4. Skill se aktivuje napsáním trigger fráze v konverzaci
@@ -103,7 +103,7 @@ Každý skill má v složce předbalený `*.zip` soubor. V Claude.ai:
 
 Některé skilly mají `PROMPT.md` (single-file portable). Otevři ho v GitHub Raw view, copy → paste do první zprávy v chatu (Claude / Gemini / GPT). Druhá zpráva = vstup pro skill.
 
-design-check má [PROMPT.md](./design-check/PROMPT.md) připravený pro tenhle režim.
+slevomat-design-principles má [PROMPT.md](./slevomat-design-principles/PROMPT.md) připravený pro tenhle režim.
 
 ### Ověření instalace (Claude Code)
 

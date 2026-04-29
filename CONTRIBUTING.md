@@ -84,7 +84,7 @@ Owner kolekce (Michal Strnadel) PR review — typicky během pár dnů.
 
 ## Existující skilly jako vzor
 
-- **[design-check](./design-check/)** — text + image input, multi-section structured output, citace ze zdrojového dokumentu
+- **[slevomat-design-principles](./slevomat-design-principles/)** — text + image input, multi-section structured output, citace ze zdrojového dokumentu
 - **[slevomat-rapid-prototype](./slevomat-rapid-prototype/)** — text input, single-file artifact output (HTML), čte design primer
 
 ## Kontakt

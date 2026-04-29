@@ -1,6 +1,6 @@
 ---
-name: design-check
-description: Reviews a feature idea, screen description or screenshot against the 7 Slevomat design principles. Produces structured per-principle feedback (Hit / Concern / Violation / Cannot tell) with specific, actionable recommendations grounded in principle quotes. Use when a PM wants to validate an idea before involving designers, when a designer wants self-review before sharing, or when an exec wants to gate-check a proposal. Triggers on phrases like "design check", "projeď přes designové principy", "design review", "ověř proti principům", "slevomat design principy".
+name: slevomat-design-principles
+description: Reviews a feature idea, screen description or screenshot against the 7 Slevomat design principles. Produces structured per-principle feedback (Hit / Concern / Violation / Cannot tell) with specific, actionable recommendations grounded in principle quotes. Use when a PM wants to validate an idea before involving designers, when a designer wants self-review before sharing, or when an exec wants to gate-check a proposal. Triggers on phrases like "slevomat design principy", "design principy", "principy check", "ověř proti principům", "design check", "design review".
 ---
 
 <!-- Metadata (not used by Claude.ai parser, kept for hub/version tracking) -->
