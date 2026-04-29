@@ -9,17 +9,33 @@
 
 ## ⚡ Rychlá instalace (Claude Code, Mac/Linux)
 
-**Všechny skilly najednou** — zkopíruj, paste do terminálu, enter:
+> ⚠️ **Tyhle příkazy se spouští v Terminal.app, NE v Claude Code chatu!**
+> Claude Code chat čeká na pokyny v přirozeném jazyce, ne shell commands.
+
+### Cesta 1: Terminal.app (3 kroky)
+
+1. Otevři **Terminal.app** (Cmd+Space → napiš "Terminal" → enter)
+2. Zkopíruj příkaz dole, paste do Terminálu, enter
+3. Restart Claude Code (Cmd+Q + znovu otevři)
 
 ```bash
 git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && cp -r /tmp/sas/{design-check,slevomat-rapid-prototype} ~/.claude/skills/ && rm -rf /tmp/sas
 ```
 
-**Jen jeden skill?** Vyber níže v tabulce a klikni na řádek skillu — najdeš tam install one-liner pro něj samotný.
+### Cesta 2: Nech Claude Code, ať skilly nainstaluje sám
 
-Po instalaci: restart Claude Code, ověř příkazem `/skill list`.
+Otevři Claude Code v jakékoliv složce a v chatu napiš:
 
-Jiné cesty (Claude.ai upload, paste prompt, symlink pro auto-update) → viz [sekce Instalace](#instalace) níže.
+> Stáhni Slevomat AI skills z `https://github.com/michalstrnadel/slevomat-ai-skills` a nainstaluj `design-check` a `slevomat-rapid-prototype` do `~/.claude/skills/`.
+
+Claude tě požádá o povolení Bash příkazů → klikni Allow → hotovo.
+
+### Ověření
+
+V Claude Code napiš `/skill list` — měl bys vidět oba skilly v "Personal skills".
+
+**Jen jeden skill?** Klikni na řádek v tabulce dole — README skillu má install one-liner pro něj samotný.
+Jiné cesty (Claude.ai upload, paste prompt, symlink pro auto-update) → [sekce Instalace](#instalace) níže.
 
 ---
 
