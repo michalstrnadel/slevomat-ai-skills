@@ -7,6 +7,22 @@
 
 ---
 
+## ⚡ Rychlá instalace (Claude Code, Mac/Linux)
+
+**Všechny skilly najednou** — zkopíruj, paste do terminálu, enter:
+
+```bash
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && cp -r /tmp/sas/{design-check,slevomat-rapid-prototype} ~/.claude/skills/ && rm -rf /tmp/sas
+```
+
+**Jen jeden skill?** Vyber níže v tabulce a klikni na řádek skillu — najdeš tam install one-liner pro něj samotný.
+
+Po instalaci: restart Claude Code, ověř příkazem `/skill list`.
+
+Jiné cesty (Claude.ai upload, paste prompt, symlink pro auto-update) → viz [sekce Instalace](#instalace) níže.
+
+---
+
 ## Skilly
 
 | Skill | Pro koho | Co dělá | Status |

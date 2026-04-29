@@ -9,6 +9,24 @@
 
 ---
 
+## ⚡ Rychlá instalace
+
+**Claude Code (Mac/Linux):**
+
+```bash
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && cp -r /tmp/sas/design-check ~/.claude/skills/ && rm -rf /tmp/sas
+```
+
+Po instalaci: restart Claude Code, napiš `design-check` v chatu.
+
+**Claude.ai (web):**
+
+Stáhni [`slevomat-design-check.zip`](./slevomat-design-check.zip) → Skills panel → **+** → **Upload a skill** → vyber ZIP.
+
+**Bez instalace** (paste prompt): Otevři [`PROMPT.md`](./PROMPT.md) v Raw view → copy → paste do první zprávy v Claude.ai / Gemini / GPT.
+
+---
+
 ## Proč to existuje
 
 Designových rozhodnutí dělá ve Slevomatu denně spousta lidí — PMs, designéři, devs, stakeholdeři. Aby produkty působily konzistentně, musíme všichni vycházet ze stejné definice toho, co je „kvalitní design".

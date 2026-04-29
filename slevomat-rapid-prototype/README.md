@@ -3,9 +3,25 @@
 > AI skill, který z volného popisu udělá **single-file HTML prototyp** ve Slevomat stylu.
 > Žádné `pnpm`, žádný build, žádný terminál — jen popis → soubor → otevřít dvojklikem v prohlížeči.
 
-**Status:** v0.1.0 (2026-04-29)
+**Status:** v0.2.0 (2026-04-29)
 **Visibility:** Public — open reference pro Slevomat tým a design komunitu.
 **Owner:** Michal Strnadel — michal.strnadel@slevomat.cz
+
+---
+
+## ⚡ Rychlá instalace
+
+**Claude Code (Mac/Linux):**
+
+```bash
+git clone https://github.com/michalstrnadel/slevomat-ai-skills.git /tmp/sas && cp -r /tmp/sas/slevomat-rapid-prototype ~/.claude/skills/ && rm -rf /tmp/sas
+```
+
+Po instalaci: restart Claude Code, napiš `rapid prototype` + popis featury.
+
+**Claude.ai (web):**
+
+Stáhni [`slevomat-rapid-prototype.zip`](./slevomat-rapid-prototype.zip) → Skills panel → **+** → **Upload a skill** → vyber ZIP.
 
 ---
 
