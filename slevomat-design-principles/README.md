@@ -3,7 +3,7 @@
 > AI skill, který posuzuje featuru, obrazovku nebo screenshot mockupu proti **7 designovým principům Slevomatu**.
 > Pure text/image-in → strukturovaný feedback-out. Žádné MCP, žádné generování souborů.
 
-**Status:** v0.1.0 (2026-04-28)
+**Status:** v0.2.0 (2026-08-13)
 **Owner:** Michal Strnadel (Design Lead, Slevomat) — michal.strnadel@slevomat.cz
 
 ---
@@ -43,7 +43,7 @@ Tento repo obsahuje **2 soubory**, které jsou taženy ze [slevomat-ai-hub](http
 | Soubor | Co obsahuje |
 |---|---|
 | [`design-principles.md`](./design-principles.md) | Kanonická verze 7 designových principů Slevomatu (Co znamená / Proč / Jak se pozná v praxi). Source of truth pro skill. |
-| [`SKILL.md`](./SKILL.md) | AI skill: instrukce, role, examples, anti-patterns. Frontmatter kompatibilní s Claude.ai uploadem (jen `name` + `description`). |
+| [`SKILL.md`](./SKILL.md) | AI skill: verdikty slovy, postup, formát reportu na jednu obrazovku, jeden příklad. Frontmatter kompatibilní s Claude.ai uploadem (jen `name` + `description`). |
 | [`PROMPT.md`](./PROMPT.md) | **Single-file portable prompt** — skill + principy zlepené do jednoho ready-to-paste promptu pro Claude.ai / Gemini / ChatGPT. Použij když nejde stáhnout repo přímo. |
 | [`slevomat-design-principles.zip`](./slevomat-design-principles.zip) | **Předbalený ZIP pro Claude.ai upload** (Skills → + → Upload a skill). Obsahuje SKILL.md + design-principles.md ve správné struktuře. |
 
@@ -122,25 +122,20 @@ Tohle občas selže kvůli **GitHub anonymous rate limitu** (zvlášť pod zát�
 
 ### Co dostaneš zpátky
 
-Kompaktní strukturovaný report (~250 slov detailu):
+Report na jednu obrazovku, česky, bez emoji:
 
-1. **Hodnocení tabulka** — všech 7 principů s emoji verdikty
-2. **Detail** — pro každý dotčený princip (✅ Hit / ⚠️ Concern / ❌ Violation):
-   - Krátká citace z principu, který byl porušen / naplněn
-   - Co konkrétně ve vstupu k tomuhle vede (1–2 věty)
-   - Konkrétní doporučení (1 věta)
-3. **Skóre** — kolik Hit / Concern / Violation / Cannot tell
-4. **Top 3 akce** — seřazené podle dopadu, ne podle čísla principu
-5. **Verdikt** — `GO` / `SHARPEN` / `HOLD` / `NEED MORE INFO`
+1. **Tabulka** — všech 7 principů, verdikt slovy: **Drží / Riziko / Porušuje / Nejde posoudit**
+2. **Detail** — jen pro principy s Riziko nebo Porušuje: citace klíčové fráze principu, jedno konkrétní pozorování, jedna oprava v rozkazovacím způsobu
+3. **Verdikt celku** — **Pusť dál / Doostři / Vrať / Chybí vstup** + „Nejdřív oprav: 1. 2. 3." podle dopadu
 
-Principy s 🤷 Cannot tell se v detailu nezobrazují — zůstávají jen v sumární tabulce, ať je report kompaktní.
+U verdiktu **Vrať** skill vždycky doporučí ozvat se designérům — vrácený koncept je pozvánka k whiteboardu, ne zamítnutí. Principy s Nejde posoudit zůstávají jen v tabulce, ať je report kompaktní.
 
 ---
 
 ## Klíčové behaviorální pravidlo
 
-> **Cannot tell ≠ Hit.**
-> Skill nesmí zakrývat nedostatek důkazů hodnocením `Hit`. Pokud ze vstupu nejde posoudit, je férovější vrátit 🤷 Cannot tell s vysvětlením, co chybí.
+> **Nejde posoudit ≠ Drží.**
+> Skill nesmí zakrývat nedostatek důkazů verdiktem „Drží" — falešné „Drží" si někdo odnese na poradu jako schválení. Když ze vstupu nejde posoudit, vrátí „Nejde posoudit" a napíše, co by stačilo dodat.
 
 ---
 
@@ -175,7 +170,7 @@ Tento standalone repo je **export ze [slevomat-ai-hub](https://github.com/slevom
 - Lehké nasazení do izolované Claude Code session
 - Demo / prezentaci principů a skillu mimo interní kontext
 
-**Source of truth zůstává hub** — pokud se principy aktualizují, dělá se to v hubu. Tento repo je periodicky resyncován (zatím manuálně).
+**Source of truth je Skill Hub** (interní hub skillů v claude.ai) — skill tam žije v pluginu `design` a principy má přiložené jako soubor. Tento repo je veřejný export a resyncuje se ručně.
 
 ---
 
@@ -193,4 +188,4 @@ Tento standalone repo je **export ze [slevomat-ai-hub](https://github.com/slevom
 
 ---
 
-*Sestaveno společně s Claude Code (Opus 4.7), 2026-04-28.*
+*v0.1.0 sestaveno s Claude Code (Opus 4.7), 2026-04-28. v0.2.0 (2026-08-13): verdikty slovy místo emoji, report na jednu obrazovku, česky a tykáním, u „Vrať" odkaz na designéry; role-play, word-budgety a dva ze tří příkladů vyhozeny.*
